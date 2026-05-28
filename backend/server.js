@@ -13,6 +13,34 @@ app.use(
 
 app.use(express.json());
 
+/* ✅ SIGNUP ROUTE */
+app.post("/api/users/signup", async (req, res) => {
+  try {
+    const { firstName, lastName, emailAddress } = req.body;
+
+    if (!firstName || !lastName || !emailAddress) {
+      return res.status(400).json({
+        message: "Missing required fields",
+      });
+    }
+
+    await db.query(
+      "INSERT INTO users (first_name, last_name, email, password, role, status) VALUES (?, ?, ?, ?, ?, ?)",
+      [firstName, lastName, emailAddress, "123456", "student", "pending"],
+    );
+
+    res.json({
+      message: "Signup successful",
+    });
+  } catch (err) {
+    console.error("SIGNUP ERROR:", err);
+    res.status(500).json({
+      message: "Server error",
+    });
+  }
+});
+
+/* ✅ LOGIN ROUTE */
 app.post("/api/users/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -26,8 +54,6 @@ app.post("/api/users/login", async (req, res) => {
     const [rows] = await db.query("SELECT * FROM users WHERE email = ?", [
       email,
     ]);
-
-    console.log("FOUND USER:", rows);
 
     const user = rows[0];
 
@@ -68,6 +94,8 @@ app.post("/api/users/login", async (req, res) => {
   }
 });
 
+/* ✅ START SERVER */
 app.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
 });
+``;

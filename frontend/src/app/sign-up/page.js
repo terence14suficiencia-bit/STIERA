@@ -535,7 +535,11 @@ export default function SignupPage() {
       {/* KEEP LOGO */}
       <div className="absolute top-4 left-4 z-50">
         <Link href="/">
-          <img src="/STIERA.png" className="w-30 h-20 object-contain" />
+          <img
+            src="/STIERA.png"
+            className="w-30 h-20 object-contain"
+            alt=" Stiera Logo"
+          />
         </Link>
       </div>
 
