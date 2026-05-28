@@ -194,7 +194,7 @@ This project demonstrates:
 
 ## 👨‍💻 Author
 
-**Terence Suficiencia**
+**San Terenzio**
 
 ---
 
